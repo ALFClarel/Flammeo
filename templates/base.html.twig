@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Flammeo{% endblock %}</title>
 
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>🔥</text></svg>">
@@ -21,19 +22,19 @@
     {% endif %}
 </head>
 
-<body style="margin: 0; font-family: Arial, sans-serif; background: #faf7f2; color: #2b2118;">
-<header style="background: #2b2118; color: white; padding: 18px 24px;">
-    <nav style="max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
-        <a href="{{ path('app_home') }}" style="color: white; text-decoration: none; font-size: 22px; font-weight: bold;">
-            Flammeo
+<body>
+<header class="site-header">
+    <nav class="site-header__inner">
+        <a href="{{ path('app_home') }}" class="site-header__logo">
+            🕯 Flammeo
         </a>
 
-        <div style="display: flex; gap: 20px; align-items: center;">
-            <a href="{{ path('app_home') }}" style="color: white; text-decoration: none;">
+        <div class="site-header__nav">
+            <a href="{{ path('app_home') }}">
                 Boutique
             </a>
 
-            <a href="{{ path('app_cart_index') }}" style="color: white; text-decoration: none;">
+            <a href="{{ path('app_cart_index') }}" class="nav-cart">
                 Panier{% if cart_count() > 0 %} ({{ cart_count() }}){% endif %}
             </a>
         </div>

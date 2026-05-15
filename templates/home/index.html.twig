@@ -33,7 +33,7 @@
                             <form method="post" action="{{ path('app_cart_add', { id: product.id }) }}">
                                 <input type="hidden" name="_token" value="{{ csrf_token('cart_add_' ~ product.id) }}">
 
-                                <button type="submit" style="cursor: pointer; padding: 12px 18px; border: 1px solid #000; background: white;">
+                                <button type="submit" class="btn btn-primary">
                                     Ajouter au panier
                                 </button>
                             </form>

@@ -3,44 +3,49 @@
 {% block title %}Mon panier - Flammeo{% endblock %}
 
 {% block body %}
-    <main style="max-width: 1000px; margin: 40px auto; padding: 0 20px;">
+    <main class="page-main cart-page">
         <h1>Mon panier</h1>
 
-        {% for label, messages in app.flashes %}
-            {% for message in messages %}
-                <div style="padding: 12px; margin: 12px 0; border: 1px solid #ddd;">
-                    {{ message }}
-                </div>
-            {% endfor %}
-        {% endfor %}
+        {% if app.flashes|length > 0 %}
+            <div class="flash-list">
+                {% for label, messages in app.flashes %}
+                    {% for message in messages %}
+                        <div class="flash">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+        {% endif %}
 
         {% if items is empty %}
-            <p>Ton panier est vide.</p>
+            <div class="cart-empty">
+                <p>Ton panier est vide.</p>
 
-            <p>
-                <a href="{{ path('app_home') }}">Voir les bougies disponibles</a>
-            </p>
+                <p>
+                    <a href="{{ path('app_home') }}" class="btn btn-primary">Voir les bougies disponibles</a>
+                </p>
+            </div>
         {% else %}
-            <div style="display: grid; gap: 20px;">
+            <div class="cart-items">
                 {% for item in items %}
                     {% set product = item.product %}
 
-                    <article style="display: flex; gap: 20px; align-items: center; border: 1px solid #ddd; padding: 16px;">
-                        <div style="width: 120px; height: 120px; background: #f3f3f3; display: flex; align-items: center; justify-content: center;">
+                    <article class="cart-item">
+                        <div class="cart-item__image">
                             {% if product.imageName %}
                                 <img
                                     src="{{ asset('uploads/products/' ~ product.imageName) }}"
                                     alt="{{ product.name }}"
-                                    style="width: 100%; height: 100%; object-fit: cover;"
                                 >
                             {% else %}
                                 <span>Aucune image</span>
                             {% endif %}
                         </div>
 
-                        <div style="flex: 1;">
-                            <h2 style="margin: 0 0 8px;">{{ product.name }}</h2>
-                            <p style="margin: 0;">
+                        <div class="cart-item__info">
+                            <h2>{{ product.name }}</h2>
+                            <p>
                                 {{ product.price|number_format(2, ',', ' ') }} €
                             </p>
                         </div>
@@ -48,28 +53,28 @@
                         <form method="post" action="{{ path('app_cart_remove', { id: product.id }) }}">
                             <input type="hidden" name="_token" value="{{ csrf_token('cart_remove_' ~ product.id) }}">
 
-                            <button type="submit">Retirer</button>
+                            <button type="submit" class="btn btn-danger">Retirer</button>
                         </form>
                     </article>
                 {% endfor %}
             </div>
 
-            <hr style="margin: 30px 0;">
+            <hr class="cart-divider">
 
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <strong>Total : {{ total|number_format(2, ',', ' ') }} €</strong>
+            <div class="cart-footer">
+                <strong class="cart-total">Total : {{ total|number_format(2, ',', ' ') }} €</strong>
 
-                <div style="display: flex; gap: 12px;">
+                <div class="cart-actions">
                     <form method="post" action="{{ path('app_cart_clear') }}">
                         <input type="hidden" name="_token" value="{{ csrf_token('cart_clear') }}">
 
-                        <button type="submit">Vider le panier</button>
+                        <button type="submit" class="btn btn-outline">Vider le panier</button>
                     </form>
 
                     <form method="post" action="{{ path('app_checkout') }}" data-turbo="false">
                         <input type="hidden" name="_token" value="{{ csrf_token('checkout') }}">
 
-                        <button type="submit">
+                        <button type="submit" class="btn btn-amber">
                             Payer
                         </button>
                     </form>
