@@ -39,5 +39,6 @@ class DashboardController extends AbstractDashboardController
             'Commandes',
             'fa fa-shopping-bag'
         );
+
     }
 }

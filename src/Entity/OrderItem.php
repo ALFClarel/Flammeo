@@ -62,4 +62,11 @@ class OrderItem
 
         return $this;
     }
+
+    public function __toString(): string
+    {
+        $productName = $this->getProduct()?->getName() ?? 'Produit supprimé';
+
+        return sprintf('%s - %.2f €', $productName, $this->getPrice() / 100);
+    }
 }

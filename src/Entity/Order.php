@@ -154,4 +154,8 @@ class Order
         return $this;
     }
 
+    public function getTotalAmountInEuros(): float
+    {
+        return $this->totalAmount / 100;
+    }
 }

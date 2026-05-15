@@ -1,0 +1,28 @@
+<h1>Merci pour ta commande</h1>
+
+<p>Bonjour,</p>
+
+<p>Ta commande Flammeo a bien été confirmée.</p>
+
+<p>
+    <strong>Numéro de commande :</strong> {{ order.id }}<br>
+    <strong>Total :</strong> {{ order.totalAmountInEuros|number_format(2, ',', ' ') }} €
+</p>
+
+<h2>Bougies commandées</h2>
+
+<ul>
+    {% for item in order.orderItems %}
+        <li>
+            {{ item.product.name }}
+            —
+            {{ item.price|number_format(2, ',', ' ') }} €
+        </li>
+    {% endfor %}
+</ul>
+
+<p>Les bougies commandées ne sont plus disponibles à la vente.</p>
+
+<p>Merci pour ta confiance.</p>
+
+<p>Camille — Flammeo</p>

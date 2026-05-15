@@ -9,6 +9,7 @@
 parameters:
     stripe_secret_key: '%env(STRIPE_SECRET_KEY)%'
     stripe_webhook_secret: '%env(STRIPE_WEBHOOK_SECRET)%'
+    mailer_from: '%env(MAILER_FROM)%'
 
 services:
     _defaults:
@@ -17,6 +18,7 @@ services:
         bind:
             string $stripeSecretKey: '%stripe_secret_key%'
             string $stripeWebhookSecret: '%stripe_webhook_secret%'
+            string $mailerFrom: '%mailer_from%'
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
