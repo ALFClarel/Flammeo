@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Flammeo - Bougies disponibles{% endblock %}
+
+{% block body %}
+    <main class="shop-page">
+        <section class="hero">
+            <p class="hero__eyebrow">Bougies artisanales uniques</p>
+            <h1>Flammeo</h1>
+            <p>Chaque bougie est une pièce unique. Quand elle est vendue, elle disparaît du catalogue.</p>
+        </section>
+
+        {% if products is empty %}
+            <section class="empty-state">
+                <h2>Aucune bougie disponible pour le moment</h2>
+                <p>Reviens bientôt, Camille prépare sûrement de nouvelles créations.</p>
+            </section>
+        {% else %}
+            <section class="product-grid" aria-label="Bougies disponibles">
+                {% for product in products %}
+                    <article class="product-card">
+                        <div class="product-card__image">
+                            {% if product.imageName %}
+                                <img src="{{ asset('uploads/products/' ~ product.imageName) }}" alt="{{ product.name }}">
+                            {% else %}
+                                <div class="product-card__placeholder">Photo à venir</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="product-card__content">
+                            <h2>{{ product.name }}</h2>
+                            <p class="product-card__price">{{ product.price|format_currency('EUR') }}</p>
+                            <form method="post" action="{{ path('app_cart_add', { id: product.id }) }}">
+                                <input type="hidden" name="_token" value="{{ csrf_token('cart_add_' ~ product.id) }}">
+
+                                <button type="submit" style="cursor: pointer; padding: 12px 18px; border: 1px solid #000; background: white;">
+                                    Ajouter au panier
+                                </button>
+                            </form>
+                        </div>
+                    </article>
+                {% endfor %}
+            </section>
+        {% endif %}
+    </main>
+{% endblock %}

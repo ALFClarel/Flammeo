@@ -22,8 +22,8 @@ class Order
     #[ORM\Column]
     private ?int $totalAmount = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $stripeSessionId = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $stripeSessionId = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $customerEmail = null;
@@ -42,6 +42,8 @@ class Order
 
     public function __construct()
     {
+        $this->status = 'pending';
+        $this->createdAt = new \DateTimeImmutable();
         $this->orderItems = new ArrayCollection();
     }
 
@@ -74,12 +76,12 @@ class Order
         return $this;
     }
 
-    public function getStripeSessionId(): ?int
+    public function getStripeSessionId(): ?string
     {
         return $this->stripeSessionId;
     }
 
-    public function setStripeSessionId(?int $stripeSessionId): static
+    public function setStripeSessionId(?string $stripeSessionId): static
     {
         $this->stripeSessionId = $stripeSessionId;
 

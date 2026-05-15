@@ -10,6 +10,11 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 class Product
 {
+
+    public const STATUS_AVAILABLE = 'available';
+    public const STATUS_RESERVED = 'reserved';
+    public const STATUS_SOLD = 'sold';
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -39,10 +44,16 @@ class Product
     #[ORM\OneToMany(targetEntity: OrderItem::class, mappedBy: 'product')]
     private Collection $orderItems;
 
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $reservedAt = null;
+
     public function __construct()
     {
+        $this->status = 'available';
+        $this->createdAt = new \DateTimeImmutable();
         $this->orderItems = new ArrayCollection();
     }
+
 
     public function getId(): ?int
     {
@@ -147,6 +158,18 @@ class Product
                 $orderItem->setProduct(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getReservedAt(): ?\DateTimeImmutable
+    {
+        return $this->reservedAt;
+    }
+
+    public function setReservedAt(?\DateTimeImmutable $reservedAt): static
+    {
+        $this->reservedAt = $reservedAt;
 
         return $this;
     }

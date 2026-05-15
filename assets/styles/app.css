@@ -1,3 +1,87 @@
 body {
     background-color: skyblue;
 }
+
+.shop-page {
+    width: min(1120px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 48px 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.hero {
+    margin-bottom: 32px;
+}
+
+.hero__eyebrow {
+    margin: 0 0 8px;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    font-size: .8rem;
+    color: #8a5a44;
+}
+
+.hero h1 {
+    margin: 0 0 8px;
+    font-size: clamp(2rem, 6vw, 4rem);
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+}
+
+.product-card {
+    overflow: hidden;
+    border: 1px solid #eee1d8;
+    border-radius: 20px;
+    background: #fffaf6;
+}
+
+.product-card__image {
+    aspect-ratio: 1 / 1;
+    background: #f4e7dd;
+}
+
+.product-card__image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.product-card__placeholder {
+    display: grid;
+    height: 100%;
+    place-items: center;
+    color: #8a5a44;
+}
+
+.product-card__content {
+    padding: 16px;
+}
+
+.product-card__content h2 {
+    margin: 0 0 8px;
+    font-size: 1.1rem;
+}
+
+.product-card__price {
+    margin: 0 0 16px;
+    font-weight: 700;
+}
+
+.product-card button {
+    width: 100%;
+    padding: 12px 14px;
+    border: 0;
+    border-radius: 999px;
+    cursor: not-allowed;
+}
+
+.empty-state {
+    padding: 32px;
+    border-radius: 20px;
+    background: #fffaf6;
+}

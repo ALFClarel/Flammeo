@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Paiement confirmé - Flammeo{% endblock %}
+
+{% block body %}
+    <main style="max-width: 900px; margin: 40px auto; padding: 0 20px;">
+        <h1>Merci pour ta commande</h1>
+        <p>Ton paiement a bien été pris en compte.</p>
+        <p>Ta commande est confirmée. Les bougies commandées ne sont plus disponibles à la vente.</p>
+
+        <p>
+            <a href="{{ path('app_home') }}">Retour à la boutique</a>
+        </p>
+    </main>
+{% endblock %}
